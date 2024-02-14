@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Country from './Components/Country';
 import Box from '@mui/material/Box';
+import AddCountry from './Components/AddCountry';
 import './App.css';
 
 
@@ -12,6 +13,17 @@ class App extends Component {
       { id: 2, name: 'China', golds: 2, silvers: 6, bronzes: 6},
       { id: 3, name: 'Russia', golds: 8, silvers: 4, bronzes: 2},
     ]
+  }
+  Delete = (id) => {
+    const countries = this.state.countries.filter(w => w.id !== id);
+    this.setState({ countries:countries });
+  }
+
+  handleAdd = (name) => { 
+    const { countries } = this.state;
+    const id = Math.floor(Math.random() * 10000);;
+    const countriesTwo = countries.concat({ id: id, name: name, golds: 0, silvers: 0, bronzes: 0 });
+    this.setState({ countries:countriesTwo });
   }
 
 AddGolds = (locaterId) => {
@@ -64,6 +76,7 @@ RemoveBronzes = (locaterId) => {
           gridTemplateColumns: 'repeat(2, 1fr)',
         }}
       >
+         <AddCountry onAdd={ this.handleAdd }/>
 
         { this.state.countries.map(indcountry => 
           
@@ -76,11 +89,12 @@ RemoveBronzes = (locaterId) => {
             GRemove={this.RemoveGolds}
             SRemove={this.RemoveSilvers}
             BRemove={this.RemoveBronzes}
+            Delete={this.Delete}
              />
         )}
       </Box>
         
-        
+       
         
       </div>
      );

@@ -27,7 +27,7 @@ class Country extends Component {
 
 
     render() {
-        const { country, GAdd, SAdd, BAdd, GRemove, SRemove, BRemove } = this.props;
+        const { country, GAdd, SAdd, BAdd, GRemove, SRemove, BRemove, Delete } = this.props;
         return (
             <Box
                 display="flex"
@@ -80,6 +80,7 @@ class Country extends Component {
                                     </Grid>
 
                                 </Typography>
+                                <button onClick={ () => Delete(country.id) }>Delete</button>
                             </CardContent>
                         </Card>
                     </Container>
